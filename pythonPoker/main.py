@@ -1,16 +1,14 @@
-# This is a sample Python script.
+from juego import repartir_cartas
+from pythonPoker.jugador import Jugador
 
-# Press Mayús+F10 to execute it or replace it with your code.
-# Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
-
-
-def print_hi(name):
-    # Use a breakpoint in the code line below to debug your script.
-    print(f'Hi, {name}')  # Press Ctrl+F8 to toggle the breakpoint.
-
-
-# Press the green button in the gutter to run the script.
 if __name__ == '__main__':
-    print_hi('PyCharm')
+    num_jugadores = 4
+    num_cartas = 5
+    manos = repartir_cartas(num_jugadores, num_cartas)
 
-# See PyCharm help at https://www.jetbrains.com/help/pycharm/
+    for i, mano in enumerate(manos):
+        print(f'Jugador {i+1} mano:')
+        for carta in mano:
+            print(carta)
+
+

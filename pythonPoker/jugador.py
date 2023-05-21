@@ -36,7 +36,7 @@ class Jugador:
     def _turnoHumano(self, minimo):
         jugadaValida = False
         apuesta = 0
-        print("[Tu turno]")
+        print("[Tu turno", self.nombre, "]")
         while not jugadaValida:
             text = input("Cuanto deseas apostar?\n- Apuesta minima de " + str(minimo) + "\n- 0 para retirarse\n")
             if not text.isdigit():
@@ -60,10 +60,3 @@ class Jugador:
     def descontarFichas(self, apuesta):
         print("Se descontaran", apuesta, "fichas del jugador", self.nombre)
         self.fichas = self.fichas - apuesta
-
-
-
-
-
-
-

@@ -2,11 +2,11 @@ from pythonPoker.jugador import Jugador
 from pythonPoker.mazo import Mazo
 
 if __name__ == '__main__':
+    # se crea el mazo y se mezclan las cartas
     mazo = Mazo()
     mazo.mezclar()
 
-# se crean 4 jugadores a modo demostracion
-
+    # se crean 4 jugadores a modo demostracion
     jugador1 = Jugador("coni", 100, False)
     jugador2 = Jugador("ro", 110, False)
     jugador3 = Jugador("flor", 105, False)

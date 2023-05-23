@@ -1,9 +1,10 @@
 class Jugador:
-    def __init__(self, nombre, fichas, esBot):
+    def __init__(self, nombre, fichas, esBot, estaJugando):
         self.mano = []
         self.esBot = esBot
         self.nombre = nombre
         self.fichas = fichas
+        self.estaJugando = estaJugando
 
     # metodo de jugador para recibir su mano de cartas. Exactamente 5 cartas
     def recibirMano(self, cartas):
@@ -50,6 +51,7 @@ class Jugador:
                         print("Apuesta invalida. No se tienen las fichas suficientes. Vuelva a intentarlo!")
                     else:
                         if apuesta == 0:
+                            self.estaJugando = False
                             print("Se retira del juego!")
                         else:
                             print("Apuesta realizada con exito")
@@ -60,3 +62,6 @@ class Jugador:
     def descontarFichas(self, apuesta):
         print("Se descontaran", apuesta, "fichas del jugador", self.nombre)
         self.fichas = self.fichas - apuesta
+
+    def recibirFichas(self, pozo):
+        self.fichas += pozo

@@ -53,8 +53,14 @@ class Jugador:
         jugadaValida = False
         apuesta = 0
         print("Tu turno", self.nombre, "!")
+        #Recuerda al jugador las cartas que tiene
+        print("Tus cartas:")
+        for carta in self.mano:
+            print(carta.palo, end=" ");
+            print(carta.valor, end=", ");
         while not jugadaValida:
             #falta agregar que muestre la mano del jugador todas las veces que se apueste
+            print("");
             print ("Cantidad de fichas que tenes: ", self.fichas) #Mostramos las fichas que le quedan al jugador
             text = input("Cuanto deseas apostar?\n- Apuesta mínima de " + str(minimo) + "\n- 0 para retirarse\n")
             if not text.isdigit():

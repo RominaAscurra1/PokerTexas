@@ -4,6 +4,9 @@ from jugador import Jugador
 class Poker: #inicializo la clase Poker
     def __init__(self):
         self.mazo = Mazo()
+        self.turno_actual = 0  # Agregamos el atributo turno_actual e inicializamos en 0
+        self.apuesta_actual = 100  # Agregamos el atributo apuesta_actual e inicializamos en 0
+
 
     usuario = input("Ingrese un nombre de usuario: ")  # Ingresa el nombre de usuario el jugador
 
@@ -108,3 +111,29 @@ class Poker: #inicializo la clase Poker
         # ESCALERA REAL
         if set(valores) == {'10','J','Q','K','A'} and len(set(palos)) == 1:
             return 1
+    def verificarFinRonda(self):
+        if self.turno_actual == 0:  # Se verifica al finalizar un ciclo de turnos
+            self.ronda_actual += 1
+    def actualizarApuesta(self, apuesta):
+        self.apuesta_actual = max(apuesta, self.apuesta_actual)
+
+    def avanzarTurno(self):
+        self.turno_actual = (self.turno_actual + 1) % len(self.jugadores)
+
+    def iniciarJuegoCompleto(self):
+        self.iniciarJuego()
+        while True:
+            if self.hayJugadoresActivos():
+                jugador = self.jugadores[self.turno_actual]
+                if jugador.estaJugando:
+                    apuesta = jugador.turno(self.apuesta_actual)
+                    self.actualizarApuesta(apuesta)
+                    self.avanzarTurno()
+            else:
+                break
+
+    def hayJugadoresActivos(self):
+        for jugador in self.jugadores:
+            if jugador.estaJugando and jugador.fichas > 0:
+                return True
+        return False

@@ -6,6 +6,7 @@ class Jugador:
         self.nombre = nombre
         self.fichas = fichas
         self.estaJugando = True
+        self.apuestaJugador=0;#variable que acumula apuesta del jugador
 
     # metodo de jugador para recibir su mano de cartas. Exactamente 5 cartas
     def recibirMano(self, cartas):
@@ -53,23 +54,25 @@ class Jugador:
         apuesta = 0
         print("Tu turno", self.nombre, "!")
         while not jugadaValida:
+            #falta agregar que muestre la mano del jugador todas las veces que se apueste
+            print ("Cantidad de fichas que tenes: ", self.fichas) #Mostramos las fichas que le quedan al jugador
             text = input("Cuanto deseas apostar?\n- Apuesta mínima de " + str(minimo) + "\n- 0 para retirarse\n")
             if not text.isdigit():
                 print("Apuesta inválida. Vuelve a intentarlo!")
             else:
-                apuesta = int(text)
-                if apuesta == 0:
+                self.apuestaJugador += int(text)#Acumulamos las apuestas
+                if self.apuestaJugador == 0:
                     self.estaJugando = False
                     print("Te has retirado del juego.")
-                    return apuesta
-                elif apuesta < minimo:
+                    return self.apuestaJugador
+                elif self.apuestaJugador < minimo:
                     print("Apuesta inválida. Debes apostar al menos", minimo, "fichas.")
-                elif apuesta > self.fichas:
+                elif self.apuestaJugador > self.fichas:
                     print("Apuesta inválida. No tienes suficientes fichas disponibles.")
                 else:
                     print("Apuesta realizada con éxito.")
-                    self.descontarFichas(apuesta)
-                    return apuesta
+                    self.descontarFichas(int(text))#descuenta sólo la ultima apuesta
+                    return self.apuestaJugador
 
     # metodo para descontar fichas
     def descontarFichas(self, cantidad):

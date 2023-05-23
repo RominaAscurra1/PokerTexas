@@ -5,7 +5,7 @@ class Poker: #inicializo la clase Poker
     def __init__(self):
         self.mazo = Mazo()
         self.turno_actual = 0  # Agregamos el atributo turno_actual e inicializamos en 0
-        self.apuesta_actual = 100  # Agregamos el atributo apuesta_actual e inicializamos en 0
+        self.apuesta_actual = 10  # Agregamos el atributo apuesta_actual e inicializamos en 0
 
 
     usuario = input("Ingrese un nombre de usuario: ")  # Ingresa el nombre de usuario el jugador

@@ -1,10 +1,11 @@
+import random
 class Jugador:
-    def __init__(self, nombre, fichas, esBot, estaJugando):
+    def __init__(self, nombre, fichas, esBot):
         self.mano = []
         self.esBot = esBot
         self.nombre = nombre
         self.fichas = fichas
-        self.estaJugando = estaJugando
+        self.estaJugando = True
 
     # metodo de jugador para recibir su mano de cartas. Exactamente 5 cartas
     def recibirMano(self, cartas):
@@ -29,39 +30,51 @@ class Jugador:
 
     # falta
 
-    def _turnoBot(self, minimo):
-        # TODO: Implementar la logica de apuesta del bot
-        return 0
+    def _turnoBot(self, minimo): #Metodo momentaneo, lo hice para poder avanzar con el del humano
+        apuesta = 0
+        if minimo == 0:
+            apuesta = random.randint(0, 10) * 10  # Apuesta aleatoria entre 0 y 100 (múltiplos de 10)
+        else:
+            if minimo > self.fichas:
+                apuesta = 0  # El bot no tiene suficientes fichas, se retira
+            else:
+                apuesta = minimo + random.randint(0,
+                                                  5) * 10  # Apuesta aleatoria entre la apuesta mínima y la apuesta mínima + 50
+        if apuesta > self.fichas:
+            apuesta = self.fichas  # Si el bot no tiene suficientes fichas, apuesta todo su saldo
+        self.descontarFichas(apuesta)
+        print("[Turno del bot ", self.nombre, "]")
+        print("El bot ", self.nombre, " apuesta ", apuesta)
+        return apuesta
 
     # metodo de ingreso de apuesta
     def _turnoHumano(self, minimo):
         jugadaValida = False
         apuesta = 0
-        print("[Tu turno", self.nombre, "]")
+        print("Tu turno", self.nombre, "!")
         while not jugadaValida:
-            text = input("Cuanto deseas apostar?\n- Apuesta minima de " + str(minimo) + "\n- 0 para retirarse\n")
+            text = input("Cuanto deseas apostar?\n- Apuesta mínima de " + str(minimo) + "\n- 0 para retirarse\n")
             if not text.isdigit():
-                print("Apuesta invalida. Vuela a intentarlo!")
+                print("Apuesta inválida. Vuelve a intentarlo!")
             else:
                 apuesta = int(text)
-                if apuesta < 0 or (apuesta < minimo and apuesta != 0):
-                    print("Apuesta invalida. Vuelva a intentarlo!")
+                if apuesta == 0:
+                    self.estaJugando = False
+                    print("Te has retirado del juego.")
+                    return apuesta
+                elif apuesta < minimo:
+                    print("Apuesta inválida. Debes apostar al menos", minimo, "fichas.")
+                elif apuesta > self.fichas:
+                    print("Apuesta inválida. No tienes suficientes fichas disponibles.")
                 else:
-                    if self.fichas < apuesta:
-                        print("Apuesta invalida. No se tienen las fichas suficientes. Vuelva a intentarlo!")
-                    else:
-                        if apuesta == 0:
-                            self.estaJugando = False
-                            print("Se retira del juego!")
-                        else:
-                            print("Apuesta realizada con exito")
-                        self.descontarFichas(apuesta)
-                        return apuesta
+                    print("Apuesta realizada con éxito.")
+                    self.descontarFichas(apuesta)
+                    return apuesta
 
     # metodo para descontar fichas
-    def descontarFichas(self, apuesta):
-        print("Se descontaran", apuesta, "fichas del jugador", self.nombre)
-        self.fichas = self.fichas - apuesta
-
+    def descontarFichas(self, cantidad):
+        self.fichas -= cantidad
+        if self.fichas < 0:
+            self.fichas = 0
     def recibirFichas(self, pozo):
         self.fichas += pozo

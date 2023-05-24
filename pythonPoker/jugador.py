@@ -10,7 +10,7 @@ class Jugador:
         self.apuestaJugador=0 #variable que acumula apuesta del jugador
         self.apuestaBot = 0  # variable que acumula la apuesta del bot
         # tira error de la clase poker
-        self.ganador = poker.seleccionarGanador()
+        # self.ganador = poker.seleccionarGanador()
 
     # metodo de jugador para recibir su mano de cartas. Exactamente 5 cartas
     def recibirMano(self, cartas):

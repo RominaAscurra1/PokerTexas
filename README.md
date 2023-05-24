@@ -1,22 +1,22 @@
-#METODOLOGIA DE LA INVESTIGACIÓN 
+# METODOLOGIA DE LA INVESTIGACIÓN 
 
-#"POKER"
+# "POKER"
 
-##Integrantes:
+## Integrantes:
 * Ascurra Romina
 * Gubiotti Flor
 * Uño Constanza
 * Zabala Martina
 
-#DESCRIPCIÓN DEL PROYECTO
+# DESCRIPCIÓN DEL PROYECTO
 
 El poker es un juego de cartas muy popular que se ha jugado durante muchos años en todo el mundo, ya sea por diversión o por dinero. Sin embargo, no siempre es posible encontrar personas dispuestas a jugar, especialmente en ciertas horas del día o en lugares donde el poker no es muy popular. Además, para los jugadores novatos, jugar contra jugadores experimentados puede ser intimidante y puede resultar en una pérdida de dinero significativa.
 
 Por lo tanto, el problema que se plantea es cómo permitir que las personas jueguen al poker en cualquier momento del día, sin importar la ubicación y sin el riesgo de perder dinero. Para abordar este problema, se propone desarrollar una aplicación que permita a los usuarios jugar al poker contra bots.
 
 
-#Instrucciones para la instalación de lo necesario para ejecutar en una máquina virtual Ubuntu 23.02
-###Debe seguir los siguientes pasos para poder correr el juego Poker:
+# Instrucciones para la instalación de lo necesario para ejecutar en una máquina virtual Ubuntu 23.02
+### Debe seguir los siguientes pasos para poder correr el juego Poker:
 
 1. Abrir la terminal del sistema, colocar el comando “ sudo apt update ”.
 ![Instruccion 1](/Imagenes_Readme/instruccion_1.jpg)

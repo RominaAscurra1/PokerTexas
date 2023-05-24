@@ -183,7 +183,7 @@ class Poker: #inicializo la clase Poker
                     ganadores.sort(key=lambda x: self.comparar_cartas(x, jugadores_cartas), reverse=True)
                     ganador_final = ganadores[0]
 
-        print("El ganador es: ", ganador_final)
+        return ganador_final
 
     def comparar_cartas(self, jugador, jugadores_cartas):  # En el caso de empate define las cartas mas altas
         mano = jugadores_cartas[jugador][0]

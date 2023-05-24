@@ -1,4 +1,5 @@
 import random
+from poker import Poker
 class Jugador:
     def __init__(self, nombre, fichas, esBot):
         self.mano = []
@@ -8,6 +9,7 @@ class Jugador:
         self.estaJugando = True
         self.apuestaJugador=0;#variable que acumula apuesta del jugador
         self.apuestaBot=0; #variable que acumula la apuesta del bot
+        self.ganador =poker.seleccionarGanador()
     # metodo de jugador para recibir su mano de cartas. Exactamente 5 cartas
     def recibirMano(self, cartas):
         if len(cartas) == 5:
@@ -87,3 +89,10 @@ class Jugador:
             self.fichas = 0
     def recibirFichas(self, pozo):
         self.fichas += pozo
+
+
+
+
+
+
+

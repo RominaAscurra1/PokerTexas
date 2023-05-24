@@ -1,4 +1,8 @@
 import random
+
+from pythonPoker import poker
+
+
 class Jugador:
     def __init__(self, nombre, fichas, esBot):
         self.mano = []
@@ -8,6 +12,7 @@ class Jugador:
         self.estaJugando = True
         self.apuestaJugador=0 #variable que acumula apuesta del jugador
         self.apuestaBot = 0  # variable que acumula la apuesta del bot
+        # se arregla error de clase poker
         self.ganador = poker.seleccionarGanador()
 
     # metodo de jugador para recibir su mano de cartas. Exactamente 5 cartas

@@ -54,7 +54,6 @@ class Jugador:
     # metodo de ingreso de apuesta
     def _turnoHumano(self, minimo):
         jugadaValida = False
-        apuesta = 0
         print("Tu turno", self.nombre, "!")
         #Recuerda al jugador las cartas que tiene
         print("Tus cartas:")

@@ -39,8 +39,7 @@ class Jugador:
         apuesta = 0
         if minimo == 0:
             apuesta = random.randint(0, 10) * 10  # Apuesta aleatoria entre 0 y 100 (múltiplos de 10)
-            #TODO:
-            self.apuestaBot += apuestaBot  # Acumula las apuestas
+            self.apuestaBot += self.apuestaBot  # Acumula las apuestas
         else:
             if minimo > self.fichas:
                 apuesta = 0  # El bot no tiene suficientes fichas, se retira
@@ -65,7 +64,7 @@ class Jugador:
             print(carta.valor, end=", ")
         while not jugadaValida:
             #falta agregar que muestre la mano del jugador todas las veces que se apueste
-            print("");
+            print("")
             print ("Cantidad de fichas que tenes: ", self.fichas) #Mostramos las fichas que le quedan al jugador
             text = input("Cuanto deseas apostar?\n- Apuesta mínima de " + str(minimo) + "\n- 0 para retirarse\n")
             if not text.isdigit():

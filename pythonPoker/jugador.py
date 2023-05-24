@@ -7,7 +7,7 @@ class Jugador:
         self.fichas = fichas
         self.estaJugando = True
         self.apuestaJugador=0;#variable que acumula apuesta del jugador
-
+        self.apuestaBot=0; #variable que acumula la apuesta del bot
     # metodo de jugador para recibir su mano de cartas. Exactamente 5 cartas
     def recibirMano(self, cartas):
         if len(cartas) == 5:
@@ -35,6 +35,7 @@ class Jugador:
         apuesta = 0
         if minimo == 0:
             apuesta = random.randint(0, 10) * 10  # Apuesta aleatoria entre 0 y 100 (múltiplos de 10)
+            self.apuestaBot += apuestaBot #Acumula las apuestas
         else:
             if minimo > self.fichas:
                 apuesta = 0  # El bot no tiene suficientes fichas, se retira
@@ -53,22 +54,27 @@ class Jugador:
         jugadaValida = False
         apuesta = 0
         print("Tu turno", self.nombre, "!")
+        # Recuerda al jugador las cartas que tiene
+        print("Tus cartas:")
+        for carta in self.mano:
+            print(carta.palo, end=" ");
+            print(carta.valor, end=", ");
         while not jugadaValida:
-            #falta agregar que muestre la mano del jugador todas las veces que se apueste
             print ("Cantidad de fichas que tenes: ", self.fichas) #Mostramos las fichas que le quedan al jugador
             text = input("Cuanto deseas apostar?\n- Apuesta mínima de " + str(minimo) + "\n- 0 para retirarse\n")
             if not text.isdigit():
                 print("Apuesta inválida. Vuelve a intentarlo!")
             else:
                 self.apuestaJugador += int(text)#Acumulamos las apuestas
-                if self.apuestaJugador == 0:
+                apuesta = int(text) #Toma el ingreso del jugador para retirarse
+                if apuesta == 0 or self.apuestaJugador == 0: #Si el jugador se queda sin fichas, termina la mano
                     self.estaJugando = False
                     print("Te has retirado del juego.")
                     return self.apuestaJugador
                 elif self.apuestaJugador < minimo:
                     print("Apuesta inválida. Debes apostar al menos", minimo, "fichas.")
                 elif self.apuestaJugador > self.fichas:
-                    print("Apuesta inválida. No tienes suficientes fichas disponibles.")
+                    print("No tienes fichas suficientes, ¿Quieres apostar las fichas restantes o quieres retirarte?")
                 else:
                     print("Apuesta realizada con éxito.")
                     self.descontarFichas(int(text))#descuenta sólo la ultima apuesta

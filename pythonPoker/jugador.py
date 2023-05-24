@@ -6,8 +6,8 @@ class Jugador:
         self.nombre = nombre
         self.fichas = fichas
         self.estaJugando = True
-        self.apuestaJugador=0;#variable que acumula apuesta del jugador
-        self.apuestaBot = 0;  # variable que acumula la apuesta del bot
+        self.apuestaJugador=0 #variable que acumula apuesta del jugador
+        self.apuestaBot = 0  # variable que acumula la apuesta del bot
         self.ganador = poker.seleccionarGanador()
 
     # metodo de jugador para recibir su mano de cartas. Exactamente 5 cartas
@@ -59,8 +59,8 @@ class Jugador:
         #Recuerda al jugador las cartas que tiene
         print("Tus cartas:")
         for carta in self.mano:
-            print(carta.palo, end=" ");
-            print(carta.valor, end=", ");
+            print(carta.palo, end=" ")
+            print(carta.valor, end=", ")
         while not jugadaValida:
             #falta agregar que muestre la mano del jugador todas las veces que se apueste
             print("");

@@ -8,7 +8,7 @@ class Jugador:
         self.estaJugando = True
         self.apuestaJugador=0 #variable que acumula apuesta del jugador
         self.apuestaBot = 0  # variable que acumula la apuesta del bot
-        self.ganador = poker.seleccionarGanador()
+        #self.ganador = poker.seleccionarGanador()
 
     # metodo de jugador para recibir su mano de cartas. Exactamente 5 cartas
     def recibirMano(self, cartas):
@@ -38,7 +38,7 @@ class Jugador:
         if minimo == 0:
             apuesta = random.randint(0, 10) * 10  # Apuesta aleatoria entre 0 y 100 (múltiplos de 10)
             #TODO:
-            self.apuestaBot += apuestaBot  # Acumula las apuestas
+            self.apuestaBot += self.apuestaBot  # Acumula las apuestas
         else:
             if minimo > self.fichas:
                 apuesta = 0  # El bot no tiene suficientes fichas, se retira

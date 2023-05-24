@@ -19,12 +19,21 @@ Por lo tanto, el problema que se plantea es cómo permitir que las personas jueg
 ###Debe seguir los siguientes pasos para poder correr el juego Poker:
 
 1. Abrir la terminal del sistema, colocar el comando “ sudo apt update ”.
+![Instruccion 1](/Imagenes_Readme/instruccion_1.jpg)
 2. Escribir la siguiente linea: “ sudo apt install git ”.
+![Instruccion 2](/Imagenes_Readme/instruccion_2.jpg)
 3. Luego de verificar la instalación de git, con “ git -version ” y obteniendo la informaciòn de la versión instalada, pasar al siguiente paso.
+![Instruccion 3](/Imagenes_Readme/instruccion_3.jpg)
 4. Necesitamos tener instalado la versión 3 de python, para realizar su instalación ponemos: “sudo apt install python3”, terminada la instalación cerramos la terminal.
+![Instruccion 4](/Imagenes_Readme/instruccion_4.jpg)
 5. Crear una carpeta para contener los archivos del juego.
+![Instruccion 5](/Imagenes_Readme/instruccion_5.jpg)
 6. Hacer click derecho sobre la carpeta creada y elegir la opción que dice “Abrir en una terminal”.
+![Instruccion 6](/Imagenes_Readme/instruccion_6.jpg)
 7. Una vez abierta la terminal, colocar el comando “ git clone https://github.com/RominaAscurra1/PokerTexas.git ”.
+![Instruccion 7](/Imagenes_Readme/instruccion_7.jpg)
 8. Terminado el proceso, escribir “cd PokerTextas” y “ cd pythonPoker ”.
+![Instruccion 8](/Imagenes_Readme/instruccion_8.jpg)
 9. Luego, ejecutamos el archivo ejecutable del juego colocando “ pyhton3 main.py ”.
+![Instruccion 9](/Imagenes_Readme/instruccion_9.jpg)
 

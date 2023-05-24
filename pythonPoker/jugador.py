@@ -37,6 +37,7 @@ class Jugador:
         apuesta = 0
         if minimo == 0:
             apuesta = random.randint(0, 10) * 10  # Apuesta aleatoria entre 0 y 100 (múltiplos de 10)
+            #TODO:
             self.apuestaBot += apuestaBot  # Acumula las apuestas
         else:
             if minimo > self.fichas:

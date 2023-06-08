@@ -35,17 +35,16 @@ class Jugador:
 
     # falta
 
-    def _turnoBot(self, minimo): #Metodo momentaneo, lo hice para poder avanzar con el del humano
+    def _turnoBot(self, minimo):  # Metodo momentaneo, lo hice para poder avanzar con el del humano
         apuesta = 0
-        if minimo == 0:
-            apuesta = random.randint(0, 10) * 10  # Apuesta aleatoria entre 0 y 100 (múltiplos de 10)
+        if minimo == 10:
+            apuesta = self.apuestas_bot()  # Llama al metodo que define una apuesta
             self.apuestaBot += self.apuestaBot  # Acumula las apuestas
         else:
             if minimo > self.fichas:
                 apuesta = 0  # El bot no tiene suficientes fichas, se retira
             else:
-                apuesta = minimo + random.randint(0,
-                                                  5) * 10  # Apuesta aleatoria entre la apuesta mínima y la apuesta mínima + 50
+                apuesta = minimo  # Iguala la apuesta
         if apuesta > self.fichas:
             apuesta = self.fichas  # Si el bot no tiene suficientes fichas, apuesta todo su saldo
         self.descontarFichas(apuesta)
@@ -92,3 +91,28 @@ class Jugador:
             self.fichas = 0
     def recibirFichas(self, pozo):
         self.fichas += pozo
+
+    def apuestas_bot(self):  # Define la cantidad que apuesta el bot
+        valores = []
+        palos = []
+        apuesta = 0
+        import poker
+        for carta in self.mano:  # Guardo cada mano en arrays separando valor de palo
+            valor = carta.valor
+            palo = carta.palo
+            valores.append(valor)
+            palos.append(palo)
+
+        mano = poker.evaluarManos(valores, palos)
+        if mano == 10 or mano == 9:
+            apuesta = random.randint(0, 20) // 5 * 5  # Apuesta aleatoria entre 0 y 20 (múltiplos de 5)
+        elif mano == 8 or mano == 7:
+            apuesta = random.randint(20, 40) // 5 * 5  # Apuesta aleatoria entre 20 y 40 (múltiplos de 5)
+        elif mano == 6 or mano == 5:
+            apuesta = random.randint(40, 60) // 5 * 5  # Apuesta aleatoria entre 40 y 60 (múltiplos de 5)
+        elif mano == 4 or mano == 3:
+            apuesta = random.randint(60, 80) // 5 * 5  # Apuesta aleatoria entre 60 y 80 (múltiplos de 5)
+        elif mano == 2 or mano == 1:
+            apuesta = self.fichas  # Apuesta todo
+
+        return apuesta

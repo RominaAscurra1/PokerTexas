@@ -1,12 +1,12 @@
 from mazo import Mazo
 from jugador import Jugador
 
-class Poker: #inicializo la clase Poker
+
+class Poker:  # inicializo la clase Poker
     def __init__(self):
         self.mazo = Mazo()
         self.turno_actual = 0  # Agregamos el atributo turno_actual e inicializamos en 0
         self.apuesta_actual = 10  # Agregamos el atributo apuesta_actual e inicializamos en 0
-
 
     usuario = input("Ingrese un nombre de usuario: ")  # Ingresa el nombre de usuario el jugador
 
@@ -19,16 +19,16 @@ class Poker: #inicializo la clase Poker
 
     jugadores = [jugadorReal, bot1, bot2, bot3, bot4]
 
-    def iniciarJuego(self): #Metodo para inicial el juego
+    def iniciarJuego(self):  # Metodo para inicial el juego
 
         for jugador in self.jugadores:
-            self.mazo.mezclar() #LLamo al metodo que mezcla las cartas
+            self.mazo.mezclar()  # LLamo al metodo que mezcla las cartas
             jugador.recibirMano(self.mazo.repartir(5))
             print(" ")
             print(jugador.nombre, "  Fichas: ", jugador.fichas)
             cont = 1
 
-            #Si es el usuario muestro su cartas, de lo contrario solo muestro el nombre y sus fichas
+            # Si es el usuario muestro su cartas, de lo contrario solo muestro el nombre y sus fichas
             for carta in jugador.mano:
                 if jugador.esBot == False:
                     print(carta.palo, end=" ")
@@ -37,68 +37,6 @@ class Poker: #inicializo la clase Poker
                 if cont == 5:
                     print(" ")
                 cont = cont + 1
-
-    def evaluarManos(self, jugador):  # Creo un metodo que evalua las manos
-        valores = []
-        palos = []
-
-        for carta in jugador.mano:  # Guardo cada mano en arrays separando valor de palo
-            valor = carta.valor
-            palo = carta.palo
-            valores.append(valor)
-            palos.append(palo)
-
-        valor_carta = {"2": 2, "3": 3, "4": 4, "5": 5, "6": 6, "7": 7, "8": 8, "9": 9, "10": 10, "J": 11, "Q": 12, "K": 13, "A": 14}
-
-        valores_unicos = set(valores)
-        valores_ordenados = sorted(valores, key=lambda x: valor_carta[x], reverse=True)
-
-        # Evaluo cada mano y le asigno un numero de prioridad
-
-        # CARTA MAS ALTA
-        if len(valores_unicos) == 5:
-            return 10
-
-        # UN PAR
-        pares = [valor for valor in valores_unicos if valores.count(valor) == 2]
-        if len(pares) == 1:
-            return 9
-
-        # DOS PARES
-        if len(pares) == 2:
-            return 8
-
-        # TRES CARTAS IGUALES
-        for valor in valores_unicos:
-            if valores.count(valor) == 3:
-                return 7
-
-        # ESCALERA
-        if len(valores_unicos) == 5 and valor_carta[valores_ordenados[0]] - valor_carta[valores_ordenados[4]] == 4:
-            return 6
-
-        # COLOR
-        if len(set(palos)) == 1:
-            return 5
-
-        # FULL HOUSE
-        if len(valores_unicos) == 2:
-            for valor in valores_unicos:
-                if valores.count(valor) == 3:
-                    return 4
-
-        # PÓKER
-        for valor in valores_unicos:
-            if valores.count(valor) == 4:
-                return 3
-
-        # ESCALERA DE COLOR
-        if len(set(palos)) == 1 and valor_carta[valores_ordenados[0]] - valor_carta[valores_ordenados[4]] == 4:
-            return 2
-
-        # ESCALERA REAL
-        if set(valores) == {'10', 'J', 'Q', 'K', 'A'} and len(set(palos)) == 1:
-            return 1
 
     def verificarFinRonda(self):
         if self.turno_actual == 0:  # Se verifica al finalizar un ciclo de turnos
@@ -214,3 +152,58 @@ class Poker: #inicializo la clase Poker
             datos[0] = cartas_convertidas
 
         return jugadores_cartas
+
+
+def evaluarManos(valores, palos):
+    valor_carta = {"2": 2, "3": 3, "4": 4, "5": 5, "6": 6, "7": 7, "8": 8, "9": 9, "10": 10, "J": 11, "Q": 12, "K": 13,
+                   "A": 14}
+
+    valores_unicos = set(valores)
+    valores_ordenados = sorted(valores, key=lambda x: valor_carta[x], reverse=True)
+
+    # Evaluo cada mano y le asigno un numero de prioridad
+
+    # CARTA MAS ALTA
+    if len(valores_unicos) == 5:
+        return 10
+
+    # UN PAR
+    pares = [valor for valor in valores_unicos if valores.count(valor) == 2]
+    if len(pares) == 1:
+        return 9
+
+    # DOS PARES
+    if len(pares) == 2:
+        return 8
+
+    # TRES CARTAS IGUALES
+    for valor in valores_unicos:
+        if valores.count(valor) == 3:
+            return 7
+
+    # ESCALERA
+    if len(valores_unicos) == 5 and valor_carta[valores_ordenados[0]] - valor_carta[valores_ordenados[4]] == 4:
+        return 6
+
+    # COLOR
+    if len(set(palos)) == 1:
+        return 5
+
+    # FULL HOUSE
+    if len(valores_unicos) == 2:
+        for valor in valores_unicos:
+            if valores.count(valor) == 3:
+                return 4
+
+    # PÓKER
+    for valor in valores_unicos:
+        if valores.count(valor) == 4:
+            return 3
+
+    # ESCALERA DE COLOR
+    if len(set(palos)) == 1 and valor_carta[valores_ordenados[0]] - valor_carta[valores_ordenados[4]] == 4:
+        return 2
+
+    # ESCALERA REAL
+    if set(valores) == {'10', 'J', 'Q', 'K', 'A'} and len(set(palos)) == 1:
+        return 1

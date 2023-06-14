@@ -77,7 +77,7 @@ class Jugador:
                     return self.apuestaJugador
                 elif self.apuestaJugador < minimo:
                     print("Apuesta inválida. Debes apostar al menos", minimo, "fichas.")
-                elif self.apuestaJugador > self.fichas:
+                elif self.apuestaJugador >= self.fichas:
                     print("No tienes fichas suficientes, ¿Quieres apostar las fichas restantes o quieres retirarte?")
                 else:
                     print("Apuesta realizada con éxito.")

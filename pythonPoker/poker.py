@@ -1,7 +1,6 @@
 from mazo import Mazo
 from jugador import Jugador
 
-
 class Poker:  # inicializo la clase Poker
     def __init__(self):
         self.mazo = Mazo()
@@ -19,18 +18,16 @@ class Poker:  # inicializo la clase Poker
 
     jugadores = [jugadorReal, bot1, bot2, bot3, bot4]
 
-    def iniciarJuego(self):  # Metodo para inicial el juego
-
+    def iniciarJuego(self):
         for jugador in self.jugadores:
-            self.mazo.mezclar()  # LLamo al metodo que mezcla las cartas
+            self.mazo.mezclar()
             jugador.recibirMano(self.mazo.repartir(5))
             print(" ")
             print(jugador.nombre, "  Fichas: ", jugador.fichas)
             cont = 1
 
-            # Si es el usuario muestro su cartas, de lo contrario solo muestro el nombre y sus fichas
             for carta in jugador.mano:
-                if jugador.esBot == False:
+                if not jugador.esBot:
                     print(carta.palo, end=" ")
                     print(carta.valor, end=", ")
 
@@ -38,28 +35,42 @@ class Poker:  # inicializo la clase Poker
                     print(" ")
                 cont = cont + 1
 
+            if not jugador.esBot:
+                jugador.fichas = self.jugadorReal.fichas
+
     def verificarFinRonda(self):
         if self.turno_actual == 0:  # Se verifica al finalizar un ciclo de turnos
             self.ronda_actual += 1
 
     def actualizarApuesta(self, apuesta):
         self.apuesta_actual = max(apuesta, self.apuesta_actual)
-
+        jugador = self.jugadores[self.turno_actual]
+        if not jugador.esBot:
+            jugador.fichas -= apuesta
     def avanzarTurno(self):
         self.turno_actual = (self.turno_actual + 1) % len(self.jugadores)
 
+    def mostrarResultadosFinales(self):
+        print("---------- Resultados finales ----------")
+        for jugador in self.jugadores:
+            print(f"{jugador.nombre}: {jugador.fichas} fichas")
+        print("----------------------------------------")
+
     def iniciarJuegoCompleto(self):
         self.iniciarJuego()
-        while True:
+        juegoEnCurso = True
+        while juegoEnCurso:
             if self.hayJugadoresActivos():
                 jugador = self.jugadores[self.turno_actual]
                 if jugador.estaJugando:
                     apuesta = jugador.turno(self.apuesta_actual)
                     self.actualizarApuesta(apuesta)
                     self.avanzarTurno()
+                    if not jugador.estaJugando and jugador == self.jugadorReal:
+                        juegoEnCurso = False
             else:
                 break
-
+        self.mostrarResultadosFinales()
     def hayJugadoresActivos(self):
         for jugador in self.jugadores:
             if jugador.estaJugando and jugador.fichas > 0:

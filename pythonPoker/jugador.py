@@ -7,7 +7,8 @@ class Jugador:
         self.nombre = nombre
         self.fichas = fichas
         self.estaJugando = True
-        self.apuestaJugador=0 #variable que acumula apuesta del jugador
+        self.apuestaJugador=0 #
+        # variable que acumula apuesta del jugador
         self.apuestaBot = 0  # variable que acumula la apuesta del bot
         # tira error de la clase poker
         # self.ganador = poker.seleccionarGanador()
@@ -85,7 +86,7 @@ class Jugador:
                     self.descontarFichas(apuesta) #descuenta sólo la ultima apuesta
                     return self.apuestaJugador
 
-    # metodo para descontar fichas
+    #metodo para descontar fichas
     def descontarFichas(self, cantidad):
         self.fichas -= cantidad
         if self.fichas < 0:

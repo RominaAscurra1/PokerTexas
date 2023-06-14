@@ -10,7 +10,7 @@ class Poker:  # inicializo la clase Poker
     usuario = input("Ingrese un nombre de usuario: ")  # Ingresa el nombre de usuario el jugador
 
     # Se crean otros 4 jugadores bots que compiten con el usuario
-    jugadorReal = Jugador(usuario, 100, False);
+    jugadorReal = Jugador(usuario, 100, False)
     bot1 = Jugador("Bot 1", 100, True)
     bot2 = Jugador("Bot 2", 100, True)
     bot3 = Jugador("Bot 3", 100, True)

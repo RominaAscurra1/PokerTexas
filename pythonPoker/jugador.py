@@ -43,6 +43,7 @@ class Jugador:
         else:
             if minimo > self.fichas:
                 apuesta = 0  # El bot no tiene suficientes fichas, se retira
+                self.estaJugando = False
             else:
                 apuesta = minimo  # Iguala la apuesta
         if apuesta > self.fichas:
@@ -69,19 +70,19 @@ class Jugador:
             if not text.isdigit():
                 print("Apuesta inválida. Vuelve a intentarlo!")
             else:
-                self.apuestaJugador += int(text)#Acumulamos las apuestas
                 apuesta = int(text) #Toma el ingreso del jugador para retirarse
-                if apuesta == 0 or self.apuestaJugador == 0: #Si el jugador se queda sin fichas, termina la mano
+                if apuesta == 0: #Si el jugador se queda sin fichas, termina la mano
                     self.estaJugando = False
                     print("Te has retirado del juego.")
-                    return self.apuestaJugador
-                elif self.apuestaJugador < minimo:
+                    return apuesta
+                elif apuesta < minimo:
                     print("Apuesta inválida. Debes apostar al menos", minimo, "fichas.")
-                elif self.apuestaJugador >= self.fichas:
+                elif apuesta > self.fichas:
                     print("No tienes fichas suficientes, ¿Quieres apostar las fichas restantes o quieres retirarte?")
                 else:
+                    self.apuestaJugador += apuesta  # Acumulamos las apuestas
                     print("Apuesta realizada con éxito.")
-                    self.descontarFichas(int(text))#descuenta sólo la ultima apuesta
+                    self.descontarFichas(apuesta)#descuenta sólo la ultima apuesta
                     return self.apuestaJugador
 
     # metodo para descontar fichas

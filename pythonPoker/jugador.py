@@ -33,7 +33,7 @@ class Jugador:
             apuesta = self._turnoHumano(minimo)
         return apuesta
 
-    # falta
+
 
     def _turnoBot(self, minimo):  # Metodo momentaneo, lo hice para poder avanzar con el del humano
         apuesta = 0
@@ -82,7 +82,7 @@ class Jugador:
                 else:
                     self.apuestaJugador += apuesta  # Acumulamos las apuestas
                     print("Apuesta realizada con éxito.")
-                    self.descontarFichas(apuesta)#descuenta sólo la ultima apuesta
+                    self.descontarFichas(apuesta) #descuenta sólo la ultima apuesta
                     return self.apuestaJugador
 
     # metodo para descontar fichas
